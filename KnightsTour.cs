@@ -1,5 +1,7 @@
 ﻿using System;
 using com.newfurniturey.KnightsTour.exceptions;
+using com.newfurniturey.KnightsTour.math;
+using System.Linq;
 
 namespace com.newfurniturey.KnightsTour {
 	class KnightsTour {
@@ -68,9 +70,9 @@ namespace com.newfurniturey.KnightsTour {
 
 			uint nextRow;
 			uint nextCol;
-			for (int i = 0; i < possibleMoves.GetLength(0); i++) {
-				nextRow = row + (uint)possibleMoves[i, 0];
-				nextCol = column + (uint)possibleMoves[i, 1];
+			foreach (int index in Enumerable.Range(0, possibleMoves.GetLength(0)).Shuffle(new System.Random())) {
+				nextRow = row + (uint)possibleMoves[index, 0];
+				nextCol = column + (uint)possibleMoves[index, 1];
 
 				if (isValidPosition(nextRow, nextCol) && !isTaken(nextRow, nextCol)) {
 					if (bruteForceMove(nextRow, nextCol)) {

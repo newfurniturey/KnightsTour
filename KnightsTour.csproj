@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="exceptions\TourIncompleteException.cs" />
     <Compile Include="KnightsTour.cs" />
+    <Compile Include="math\Random.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
