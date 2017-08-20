@@ -1,0 +1,6 @@
+# Normalize line endings
+* text=auto
+
+# CLI merge FTW
+*.sln       merge=binary
+*.csproj    merge=binary
