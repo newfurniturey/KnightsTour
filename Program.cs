@@ -14,6 +14,12 @@ namespace com.newfurniturey.KnightsTour {
 			KnightsTour tour = new KnightsTour(boardWidth, boardHeight);
 			tour.PrintBoard();
 
+			Console.WriteLine("\nBrute-Force");
+			bool bruteForceResult = tour.BruteForce();
+
+			Console.WriteLine("Success: {0}", bruteForceResult);
+			tour.PrintBoard();
+
 			Console.ReadLine();
 
 		}

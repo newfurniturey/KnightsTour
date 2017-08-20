@@ -12,6 +12,17 @@ namespace com.newfurniturey.KnightsTour {
 		private uint[,] board;
 		private uint currentMove = 1;
 
+		private int[,] possibleMoves = new int[,] {
+			{ 2, 1 },   // up 2, right 1
+			{ 2, -1 },  // up 2, left 1
+			{ 1, 2 },   // up 1, right 2
+			{ 1, -2 },  // up 1, left 2
+			{ -2, 1 },  // down 2, right 1
+			{ -2, -1 }, // down 2, left 1
+			{ -1, 2 },  // down 1, right 2
+			{ -1, -2 }  // down 1, left 2
+		};
+
 		public uint BoardWidth {
 			get { return boardWidth; }
 		}
@@ -24,6 +35,40 @@ namespace com.newfurniturey.KnightsTour {
 			boardWidth = columns;
 			boardHeight = rows;
 			initializeBoard();
+		}
+
+		public bool BruteForce(uint startRow = 0, uint startColumn = 0) {
+			if (!bruteForceMove(startRow, startColumn)) {
+				return false;
+			}
+
+			return IsBoardComplete();
+		}
+
+		private bool bruteForceMove(uint row, uint column) {
+			if (!isValidPosition(row, column) || isTaken(row, column)) {
+				return false;
+			}
+			move(row, column);
+
+			if (IsBoardComplete()) {
+				return true;
+			}
+
+			uint nextRow;
+			uint nextCol;
+			for (int i = 0; i < possibleMoves.GetLength(0); i++) {
+				nextRow = row + (uint)possibleMoves[i, 0];
+				nextCol = column + (uint)possibleMoves[i, 1];
+
+				if (isValidPosition(nextRow, nextCol) && !isTaken(nextRow, nextCol)) {
+					if (bruteForceMove(nextRow, nextCol)) {
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 
 		public bool IsBoardComplete() => (currentMove == (BoardWidth * BoardHeight) + 1);
