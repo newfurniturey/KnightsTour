@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using com.newfurniturey.KnightsTour.exceptions;
 
 namespace com.newfurniturey.KnightsTour {
 	class KnightsTour {
@@ -35,6 +32,20 @@ namespace com.newfurniturey.KnightsTour {
 			boardWidth = columns;
 			boardHeight = rows;
 			initializeBoard();
+		}
+
+		public uint[] GetTour() {
+			if (!IsBoardComplete()) {
+				throw new TourIncompleteException();
+			}
+
+			uint[] tour = new uint[board.Length];
+			for (uint row = 0; row < BoardHeight; row++) {
+				for (uint col = 0; col < BoardWidth; col++) {
+					tour[(row * BoardWidth) + col] = board[row, col];
+				}
+			}
+			return tour;
 		}
 
 		public bool BruteForce(uint startRow = 0, uint startColumn = 0) {

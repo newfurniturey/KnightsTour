@@ -20,6 +20,11 @@ namespace com.newfurniturey.KnightsTour {
 			Console.WriteLine("Success: {0}", bruteForceResult);
 			tour.PrintBoard();
 
+			uint[] tourSequence = tour.GetTour();
+			for (int i = 0; i < tourSequence.Length; i++) {
+				Console.Write("{0}, ", tourSequence[i]);
+			}
+
 			Console.ReadLine();
 
 		}
